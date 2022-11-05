@@ -8,7 +8,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://p27:sam@cluster0.vjlpv5b.mongodb.net/todolistDB");
+mongoose.connect(
+  "mongodb+srv://p27:sam@cluster0.vjlpv5b.mongodb.net/todolistDB"
+);
 const itemsSchema = {
   name: String,
 };
@@ -103,12 +105,12 @@ app.get("/:customListName", (req, res) => {
   });
 });
 
-// app.post("/work", (req, res) => {
-//   let item = req.body.newItem;
-//   workItems.push(item);
-//   res.redirect("/work");
-// });
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port=3000;
+}
+app.listen(port);
 
-app.listen(3000, () => {
-  console.log("server running on port 3000");
+app.listen(port, () => {
+  console.log("server running!");
 });
